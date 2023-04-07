@@ -2,14 +2,14 @@
 //   method: 'GET',
 //   redirect: 'follow',
 // };
-
+import { ENDPOINT, NOTIFICATION } from '@/constants';
 import TestComponent from '@/components/Test';
 import { Props2 } from '@/components/Test/testTypes';
 
 async function getData() {
-  const res = await fetch('https://dummyjson.com/products/category/laptops');
+  const res = await fetch(ENDPOINT.test.products);
   if (!res.ok) {
-    throw new Error('Failed to fetch data');
+    throw new Error(NOTIFICATION.error.fetchData);
   }
 
   return res.json();
