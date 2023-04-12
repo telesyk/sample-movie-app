@@ -3,16 +3,20 @@ import MovieCardImage from './MovieCardImage';
 import MovieCardInfo from './MovieCardInfo';
 
 type Props = {
+  id: string | number;
   imageSlot?: ReactNode;
   infoSlot?: ReactNode;
 };
 
-function MovieCard({ imageSlot, infoSlot }: Props) {
+function MovieCard({ id, imageSlot, infoSlot }: Props) {
   return (
-    <div className="w-[280px] h-[160px] relative rounded-sm overflow-hidden bg-custom-light/30">
+    <a
+      href={`/${id}`}
+      className="w-[280px] h-[160px] relative rounded-sm overflow-hidden bg-custom-light/30"
+    >
       {imageSlot}
       {infoSlot}
-    </div>
+    </a>
   );
 }
 

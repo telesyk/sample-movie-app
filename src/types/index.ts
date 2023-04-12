@@ -7,12 +7,12 @@ export interface MovieImage extends MovieInfo {
 }
 
 export interface Movie extends MovieImage {
-  id?: string;
-  rank?: number | string;
-  rankUpDown?: number | string;
+  id: string | number;
+  rank?: string | number;
+  rankUpDown?: string | number;
   fullTitle?: string;
-  year?: number | string;
+  year?: string | number;
   crew?: string;
-  imDbRating?: number | string;
-  imDbRatingCount?: number | string;
+  imDbRating?: string | number;
+  imDbRatingCount?: string | number;
 }

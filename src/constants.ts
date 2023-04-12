@@ -11,6 +11,11 @@ export const ENDPOINT = {
   imdb: {
     title: (id: number | string) =>
       `https://imdb-api.com/en/API/Title/${KEY_IMDB}/${id}`,
+    resizeImage: (w: number, h: number, url: string | undefined) => {
+      return !url
+        ? null
+        : `https://imdb-api.com/API/ResizeImage?apiKey=${KEY_IMDB}&size=${w}x${h}&url=${url}`;
+    },
   },
 };
 

@@ -24,15 +24,13 @@ export default async function Home() {
   const data = await getData();
 
   return (
-    <main className="px-4 py-8">
-      <div className="mx-auto max-w-screen-xl">
-        <h1 className="text-2xl">Hey you! wsap!!</h1>
-        <div className="py-6 flex gap-6 flex-wrap">
-          {data.products.map((product: Props2) => (
-            <TestComponent key={product.id} product={product} />
-          ))}
-        </div>
+    <>
+      <h1 className="text-2xl">Hey you! wsap!!</h1>
+      <div className="py-6 flex gap-6 flex-wrap">
+        {data.products.map((product: Props2) => (
+          <TestComponent key={product.id} product={product} />
+        ))}
       </div>
-    </main>
+    </>
   );
 }

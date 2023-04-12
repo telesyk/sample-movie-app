@@ -2,23 +2,12 @@
 //   method: 'GET',
 //   redirect: 'follow',
 // };
-import { ENDPOINT, NOTIFICATION } from '@/constants';
 import MovieCard from '@/components/MovieCard';
-// import MovieCardImage from '@/components/MovieCard/MovieCardImage';
-// import MovieCardInfo from '@/components/MovieCard/MovieCardInfo';
-import { Movie } from '@/components/MovieCard/MovieCardType';
-
-async function getData() {
-  const res = await fetch(ENDPOINT.mock.limitProducts);
-  if (!res.ok) {
-    throw new Error(NOTIFICATION.error.fetchData);
-  }
-
-  return res.json();
-}
+import { Movie } from '@/types';
+import { fetchData } from '@/utils';
 
 export default async function Movies() {
-  const data = await getData();
+  const data = await fetchData();
 
   return (
     <main className="px-4 py-8">
@@ -29,6 +18,7 @@ export default async function Movies() {
             {data.map((movie: Movie) => (
               <MovieCard
                 key={movie.id}
+                id={movie.id}
                 imageSlot={
                   <MovieCard.Image image={movie.image} title={movie.title} />
                 }
