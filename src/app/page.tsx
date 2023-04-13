@@ -15,7 +15,7 @@ async function getData() {
   return res.json();
 }
 
-export default async function Home() {
+async function Home() {
   // fetch('https://imdb-api.com/en/API/Title/k_1234567/tt1832382', requestOptions)
   //   .then(response => response.text())
   //   .then(result => console.log(result))
@@ -34,3 +34,5 @@ export default async function Home() {
     </>
   );
 }
+
+export default Home;

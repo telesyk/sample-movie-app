@@ -3,10 +3,12 @@
 //   redirect: 'follow',
 // };
 import MovieCard from '@/components/MovieCard';
-import { Movie } from '@/types';
+import MovieCardInfo from '@/components/MovieCard/MovieCardInfo';
+import MovieCardImage from '@/components/MovieCard/MovieCardImage';
+import { MovieType } from '@/types';
 import { fetchData } from '@/utils';
 
-export default async function Movies() {
+async function Movies() {
   const data = await fetchData();
 
   return (
@@ -15,15 +17,11 @@ export default async function Movies() {
         <h1 className="text-2xl">Movies! wsap!!</h1>
         {data && data.length ? (
           <div className="my-8 flex gap-4 flex-wrap">
-            {data.map((movie: Movie) => (
-              <MovieCard
-                key={movie.id}
-                id={movie.id}
-                imageSlot={
-                  <MovieCard.Image image={movie.image} title={movie.title} />
-                }
-                infoSlot={<MovieCard.Info title={movie.title} />}
-              />
+            {data.map((movie: MovieType) => (
+              <MovieCard key={movie.id} movie={movie}>
+                <MovieCardImage />
+                <MovieCardInfo />
+              </MovieCard>
             ))}
           </div>
         ) : (
@@ -33,3 +31,5 @@ export default async function Movies() {
     </main>
   );
 }
+
+export default Movies;

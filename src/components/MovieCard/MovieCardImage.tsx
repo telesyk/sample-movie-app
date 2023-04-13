@@ -1,19 +1,20 @@
 'use client';
 
 import { FaFilm } from 'react-icons/fa';
-import { MovieImage } from '@/types';
 import Image from 'next/image';
+import { useMovieCardContext } from './MovieCardContext';
 
-function MovieCardImage({ image, title }: MovieImage) {
+function MovieCardImage() {
+  const { movie } = useMovieCardContext();
   return (
     <div className="h-full relative">
-      {!image ? (
+      {!movie.image ? (
         <FaFilm className="w-16 h-16 animate-pulse absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-custom-light/30" />
       ) : (
         <>
           <Image
-            src={image}
-            alt={title}
+            src={movie.image}
+            alt={movie.title || ''}
             width={150}
             height={150}
             loading="lazy"

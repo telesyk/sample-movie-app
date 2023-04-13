@@ -1,12 +1,12 @@
-export interface MovieInfo {
-  title: string;
+export interface MovieInfoType {
+  title?: string;
 }
 
-export interface MovieImage extends MovieInfo {
+export interface MovieImageType extends MovieInfoType {
   image?: string;
 }
 
-export interface Movie extends MovieImage {
+export interface MovieType extends MovieImageType {
   id: string | number;
   rank?: string | number;
   rankUpDown?: string | number;

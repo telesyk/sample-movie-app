@@ -1,26 +1,25 @@
-import React, { ReactNode } from 'react';
-import MovieCardImage from './MovieCardImage';
-import MovieCardInfo from './MovieCardInfo';
+'use client';
+
+import { ReactNode } from 'react';
+import { MovieType } from '@/types';
+import { MovieCardProvider } from './MovieCardContext';
 
 type Props = {
-  id: string | number;
-  imageSlot?: ReactNode;
-  infoSlot?: ReactNode;
+  movie: MovieType;
+  children?: ReactNode;
 };
 
-function MovieCard({ id, imageSlot, infoSlot }: Props) {
+function MovieCard({ movie, children }: Props) {
   return (
-    <a
-      href={`/${id}`}
-      className="w-[280px] h-[160px] relative rounded-sm overflow-hidden bg-custom-light/30"
-    >
-      {imageSlot}
-      {infoSlot}
-    </a>
+    <MovieCardProvider movie={movie}>
+      <a
+        href={`/${movie.id}`}
+        className="w-[280px] h-[160px] relative rounded-sm overflow-hidden bg-custom-light/30"
+      >
+        {children}
+      </a>
+    </MovieCardProvider>
   );
 }
-
-MovieCard.Image = MovieCardImage;
-MovieCard.Info = MovieCardInfo;
 
 export default MovieCard;
