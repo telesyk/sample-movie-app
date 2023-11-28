@@ -1,38 +1,63 @@
-// const requestOptions = {
-//   method: 'GET',
-//   redirect: 'follow',
-// };
-import { ENDPOINT, NOTIFICATION } from '@/constants';
-import TestComponent from '@/components/Test';
-import { Props2 } from '@/components/Test/testTypes';
+import MovieCard from '@/components/MovieCard';
+import MovieCardInfo from '@/components/MovieCard/MovieCardInfo';
+import MovieCardImage from '@/components/MovieCard/MovieCardImage';
+import { MovieType } from '@/types';
+import { fetchData } from '@/utils';
 
-async function getData() {
-  const res = await fetch(ENDPOINT.test.products);
-  if (!res.ok) {
-    throw new Error(NOTIFICATION.error.fetchData);
-  }
-
-  return res.json();
-}
-
-async function Home() {
-  // fetch('https://imdb-api.com/en/API/Title/k_1234567/tt1832382', requestOptions)
-  //   .then(response => response.text())
-  //   .then(result => console.log(result))
-  //   .catch(error => console.log('error', error));
-  // let data = {};
-  const data = await getData();
+async function Movies() {
+  const mostViewed = await fetchData();
+  const topRated = await fetchData();
+  const mostNew = await fetchData();
 
   return (
     <>
-      <h1 className="text-2xl">Hey you! wsap!!</h1>
-      <div className="py-6 flex gap-6 flex-wrap">
-        {data.products.map((product: Props2) => (
-          <TestComponent key={product.id} product={product} />
-        ))}
-      </div>
+      {mostViewed && mostViewed.length ? (
+        <>
+          <h1 className="text-2xl">Most viewed:</h1>
+          <div className="my-8 flex gap-4 overflow-x-auto">
+            {mostViewed.map((movie: MovieType) => (
+              <MovieCard key={movie.id} movie={movie}>
+                <MovieCardImage />
+                <MovieCardInfo />
+              </MovieCard>
+            ))}
+          </div>
+        </>
+      ) : (
+        <p>Data loading</p>
+      )}
+      {topRated && topRated.length ? (
+        <>
+          <h1 className="text-2xl">Top rated:</h1>
+          <div className="my-8 flex gap-4 overflow-x-auto">
+            {topRated.map((movie: MovieType) => (
+              <MovieCard key={movie.id} movie={movie}>
+                <MovieCardImage />
+                <MovieCardInfo />
+              </MovieCard>
+            ))}
+          </div>
+        </>
+      ) : (
+        <p>Data loading</p>
+      )}
+      {mostNew && mostNew.length ? (
+        <>
+          <h1 className="text-2xl">Latest:</h1>
+          <div className="my-8 flex gap-4 overflow-x-auto">
+            {mostNew.map((movie: MovieType) => (
+              <MovieCard key={movie.id} movie={movie}>
+                <MovieCardImage />
+                <MovieCardInfo />
+              </MovieCard>
+            ))}
+          </div>
+        </>
+      ) : (
+        <p>Data loading</p>
+      )}
     </>
   );
 }
 
-export default Home;
+export default Movies;

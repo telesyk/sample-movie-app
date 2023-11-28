@@ -14,7 +14,7 @@ function MovieCard({ movie, children }: Props) {
     <MovieCardProvider movie={movie}>
       <a
         href={`/${movie.id}`}
-        className="w-[280px] h-[160px] relative rounded-sm overflow-hidden bg-custom-light/30"
+        className="h-[160px] lg:h-[200px] basis-72 lg:basis-80 grow shrink-0 relative rounded-sm overflow-hidden bg-custom-light/30"
       >
         {children}
       </a>

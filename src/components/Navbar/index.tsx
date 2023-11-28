@@ -3,11 +3,11 @@ import React from 'react';
 
 function Navbar() {
   return (
-    <div className="bg-custom-grey-600">
-      <div className="mx-auto max-w-screen-xl">
-        <nav className="py-4 flex gap-4">
+    <div className="px-4 bg-zinc-900">
+      <div className="mx-auto max-w-screen-md">
+        <nav className="py-4 flex justify-center gap-4">
           <Link href="/">Home</Link>
-          <Link href="/movies">Movies</Link>
+          <Link href="/test">Test</Link>
         </nav>
       </div>
     </div>

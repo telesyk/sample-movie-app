@@ -15,4 +15,5 @@ export interface MovieType extends MovieImageType {
   crew?: string;
   imDbRating?: string | number;
   imDbRatingCount?: string | number;
+  plot: string;
 }

@@ -11,7 +11,7 @@ async function MoviePage({ params }: { params: { movieId: string | number } }) {
     const currentMovie = data.find(
       (item: MovieType) => item.id === params.movieId
     );
-    // console.debug(currentMovie);
+
     const {
       title,
       fullTitle,
@@ -28,27 +28,36 @@ async function MoviePage({ params }: { params: { movieId: string | number } }) {
       <>
         <h1 className="text-4xl">{title || ''}</h1>
         <h2 className="text-xl text-custom-light/80">{fullTitle}</h2>
-        <Image
-          src={image}
-          alt={title || ''}
-          width={200}
-          height={200}
-          className=" w-fit h-auto"
-        />
-        <p>
-          Position: {rank} (
-          <span className="text-sm text-custom-light/80">{rankUpDown}</span>)
-        </p>
-        <p>Year: {year}</p>
-        <p>Crew: {crew}</p>
-        <p className="flex gap-2 items-center">
-          <FaImdb />
-          {imDbRating} (
-          <span className="text-sm text-custom-light/80">
-            {imDbRatingCount}
-          </span>
-          )
-        </p>
+        <div className="flex justify-start gap-4 py-4 lg:py-8">
+          <Image
+            src={image}
+            alt={title || ''}
+            width={200}
+            height={200}
+            className=" w-fit h-auto basis-1/2"
+          />
+          <div className="basis-1/2">
+            <p className="flex gap-2 items-center pt-4 text-2xl">
+              <FaImdb />
+              {imDbRating} (
+              <span className="text-sm text-custom-light/80">
+                {imDbRatingCount}
+              </span>
+              )
+            </p>
+            <p className="pb-4 pt-2">
+              Position: {rank} (
+              <span className="text-sm text-custom-light/80">{rankUpDown}</span>
+              )
+            </p>
+            <p>
+              Year: <span className="text-custom-light/80">{year}</span>
+            </p>
+            <p className="py-4">
+              Crew: <span className="text-custom-light/80 italic">{crew}</span>
+            </p>
+          </div>
+        </div>
       </>
     );
   };

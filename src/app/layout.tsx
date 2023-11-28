@@ -12,7 +12,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       <body className="h-screen bg-custom-grey-800 text-custom-light">
         <Navbar />
         <main className="px-4 py-8">
-          <div className="mx-auto max-w-screen-xl">{children}</div>
+          <div className="mx-auto max-w-screen-lg">{children}</div>
         </main>
       </body>
     </html>
