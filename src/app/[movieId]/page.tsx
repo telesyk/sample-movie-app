@@ -28,15 +28,15 @@ async function MoviePage({ params }: { params: { movieId: string | number } }) {
       <>
         <h1 className="text-4xl">{title || ''}</h1>
         <h2 className="text-xl text-custom-light/80">{fullTitle}</h2>
-        <div className="flex justify-start gap-4 py-4 lg:py-8">
+        <div className="flex items-center flex-col sm:flex-row sm:items-start gap-4 py-4 lg:py-8">
           <Image
             src={image}
             alt={title || ''}
             width={200}
             height={200}
-            className=" w-fit h-auto basis-1/2"
+            className="w-fit h-auto basis-1 sm:basis-1/2 md:basis-1/3"
           />
-          <div className="basis-1/2">
+          <div className="basis-1 sm:basis-1/2 md:basis-2/3">
             <p className="flex gap-2 items-center pt-4 text-2xl">
               <FaImdb />
               {imDbRating} (
