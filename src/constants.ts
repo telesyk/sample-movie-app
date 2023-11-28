@@ -5,8 +5,9 @@ export const ENDPOINT = {
     products: 'https://dummyjson.com/products/category/laptops',
   },
   mock: {
-    products: 'http://localhost:3000/api/mock-data',
-    limitProducts: 'http://localhost:3000/api/mock-limit-data',
+    fullList: 'http://localhost:3000/api/mock-data',
+    limitList30: 'http://localhost:3000/api/mock-limit-data',
+    limitList10: 'http://localhost:3000/api/mock-data-limit-10',
   },
   imdb: {
     title: (id: number | string) =>
