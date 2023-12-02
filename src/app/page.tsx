@@ -1,4 +1,10 @@
-import { getMovies, getPosters, getTrailer, getRandomIntMax } from '@/utils';
+import {
+  getMovies,
+  getPosters,
+  getTitle,
+  getTrailer,
+  getRandomIntMax,
+} from '@/utils';
 import MovieList from '@/components/MovieList';
 import MoviePromo from '@/components/MoviePromo';
 
@@ -12,15 +18,22 @@ async function Home() {
   const promoMovieData = dataAllTopRated[randomInt];
   // const promoMoviePoster = await getPosters(promoMovieData.id);
   const promoMovieTrailer = await getTrailer(promoMovieData.id);
+  const promoMovieTitle = await getTitle(promoMovieData.id);
   //
-  console.log('[movie to prom]', promoMovieData.title, promoMovieTrailer);
+  /* DEBUG */ console.log('[trailer to prom]', promoMovieTrailer);
+
+  const promoMovieDetails = {
+    ...promoMovieData,
+    ...promoMovieTitle,
+    trailer: promoMovieTrailer,
+  };
 
   return (
     <>
-      <MoviePromo {...promoMovieData} trailer={promoMovieTrailer} />
-      {/* <MovieList data={dataTheaters} title="In theaters:" />
+      <MoviePromo {...promoMovieDetails} />
+      <MovieList data={dataTheaters} title="In theaters:" />
       <MovieList data={dataSoon} title="Coming soon:" />
-      <MovieList data={dataPopular} title="Most popular:" /> */}
+      <MovieList data={dataPopular} title="Most popular:" />
       {/* <MovieList data={dataTopRated} title="Top rated:" /> */}
     </>
   );

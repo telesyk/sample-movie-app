@@ -4,27 +4,21 @@ import { MovieType } from '@/types';
 export default function MoviePromo({
   id,
   title,
+  fullTitle,
   crew,
   trailer,
   image,
-  imDbRating,
+  plot,
+  runtimeStr,
 }: MovieType) {
-  // const posterarr = await getPosters(id);
-  /* DEbUG */ console.debug('[MoviePromo]', trailer);
-
   return (
-    <div className="relative w-full min-h-96 max-h-[75vh] mt-4 mb-12 overflow-hidden">
-      <div className="relative flex flex-col md:flex-row justify-center gap-4">
-        <div className="text-2xl py-4 px-3 md:absolute top-0 left-0 right-0 md:bg-gradient-to-b md:from-custom-grey-800 md:to-transparent">
-          {title}
+    <div className="relative w-full md:min-h-96 md:max-h-[75vh] mt-4 mb-12 overflow-hidden">
+      <div className="md:grid grid-cols-2 xl:grid-cols-3 auto-rows-min gap-4 py-5">
+        <div className="order-2 xl:col-span-2 text-2xl xl:text-4xl pb-5 px-3 md:p-0 md:bg-gradient-to-b md:from-custom-grey-800 md:to-transparent">
+          {fullTitle}
         </div>
-        {!!trailer && (
-          <div className="text-2xl md:basis-2/3 md:order-2">
-            <embed type="video/webm" src={trailer} width="450" height="200" />
-          </div>
-        )}
 
-        <div className="text-2xl md:basis-1/3 md:order-1">
+        <div className="order-1 row-span-3">
           <Image
             src={image || ''}
             alt={title || ''}
@@ -33,6 +27,31 @@ export default function MoviePromo({
             className="min-w-full"
           />
         </div>
+
+        <div className="order-3 xl:col-span-2 text-sm">
+          <div className="py-2">
+            <p className="text-bold">Crew: </p>
+            <p className="text-gray-50/70">{crew}</p>
+          </div>
+          {plot && (
+            <div className="py-2">
+              <p className="text-bold">Plot: </p>
+              <p className="text-gray-50/70">{plot}</p>
+            </div>
+          )}
+          {runtimeStr && (
+            <div className="py-2">
+              <p className="text-bold">Duration: </p>
+              <p className="text-gray-50/70">{runtimeStr}</p>
+            </div>
+          )}
+        </div>
+
+        {trailer !== undefined && (
+          <div className="order-4 xl:col-span-2">
+            <embed type="video/webm" src={trailer} width="480" height="210" />
+          </div>
+        )}
       </div>
     </div>
   );

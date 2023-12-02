@@ -14,6 +14,7 @@ export const ENDPOINT = {
     moviePoster: (id: string) => `http://localhost:3000/api/movie/${id}/poster`,
     movieTrailer: (id: string) =>
       `http://localhost:3000/api/movie/${id}/trailer`,
+    movieTitle: (id: string) => `http://localhost:3000/api/movie/${id}/title`,
     //
     fullList: 'http://localhost:3000/api/mock-data',
   },

@@ -17,4 +17,5 @@ export interface MovieType extends MovieImageType {
   imDbRatingCount?: string | number;
   plot?: string;
   trailer?: string;
+  runtimeStr?: string;
 }
