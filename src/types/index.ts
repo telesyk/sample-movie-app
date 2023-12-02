@@ -7,7 +7,7 @@ export interface MovieImageType extends MovieInfoType {
 }
 
 export interface MovieType extends MovieImageType {
-  id: string | number;
+  id: string;
   rank?: string | number;
   rankUpDown?: string | number;
   fullTitle?: string;
@@ -16,4 +16,5 @@ export interface MovieType extends MovieImageType {
   imDbRating?: string | number;
   imDbRatingCount?: string | number;
   plot?: string;
+  trailer?: string;
 }

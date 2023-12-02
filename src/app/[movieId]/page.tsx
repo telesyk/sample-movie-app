@@ -2,10 +2,10 @@ import React from 'react';
 import Image from 'next/image';
 import { FaImdb } from 'react-icons/fa';
 import { MovieType } from '@/types';
-import { fetchData } from '@/utils';
+import { getMovies } from '@/utils';
 
 async function MoviePage({ params }: { params: { movieId: string | number } }) {
-  const data = await fetchData();
+  const data = await getMovies();
 
   const renderMovieDetails = () => {
     const currentMovie = data.find(
