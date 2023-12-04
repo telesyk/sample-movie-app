@@ -5,7 +5,7 @@ async function getTitle(id: string) {
     const res = await fetch(ENDPOINT.mock.movieTitle(id));
     return res.json();
   } catch (error) {
-    console.error(`${error}.\n Can't load movie ${id} title details`);
+    console.error(`Failed loading movie details [getTitle]\n ${id}\n`, error);
     return null;
   }
 }

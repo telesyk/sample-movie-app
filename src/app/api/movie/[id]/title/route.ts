@@ -10,8 +10,8 @@ export async function GET(
     plot,
     awards,
     directors,
-    starsList,
-    writerList,
+    stars,
+    writers,
   } = await import(`@/imdb_api_data/Movie/${id}/Title\ ${id}.json`);
   const body: object = {
     fullTitle,
@@ -20,8 +20,8 @@ export async function GET(
     plot,
     awards,
     directors,
-    starsList,
-    writerList,
+    stars,
+    writers,
   } || {
     message: `Title was not found for ${id} movie`,
   };

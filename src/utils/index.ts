@@ -4,6 +4,7 @@ import getRandomIntMinMax from './get-random-min-max';
 import getPosters from './get-posters';
 import getTrailer from './get-trailer';
 import getTitle from './get-title';
+import getSingleMovie from './get-single-movie';
 
 export {
   getMovies,
@@ -12,4 +13,5 @@ export {
   getPosters,
   getTrailer,
   getTitle,
+  getSingleMovie,
 };

@@ -6,6 +6,7 @@ async function getTrailer(id: string) {
     return res.json();
   } catch (error) {
     console.error(`${error}.\n Can't load movie ${id} trailer`);
+    console.error(`Failed loading trailer [getTrailer]\n ${id}\n`, error);
     return null;
   }
 }

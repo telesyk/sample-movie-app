@@ -3,6 +3,8 @@ import MovieCardInfo from '@/components/MovieCard/MovieCardInfo';
 import MovieCardImage from '@/components/MovieCard/MovieCardImage';
 import { MovieType } from '@/types';
 
+const mockItems: number[] = [1, 2, 3];
+
 export default function MovieList({
   data,
   title,
@@ -10,7 +12,6 @@ export default function MovieList({
   data: any;
   title: string;
 }) {
-  const loadingMockItems: number[] = [1, 2, 3];
   return (
     <>
       {data && data.length ? (
@@ -26,14 +27,16 @@ export default function MovieList({
           </div>
         </>
       ) : (
-        <div className="flex gap-4">
-          {loadingMockItems.map((item: number) => (
+        <div className="my-8 flex gap-4">
+          {mockItems.map((item: number) => (
             <div
               key={item}
               className="animate animate-pulse p-4 h-[160px] lg:h-[200px] w-[320px] flex flex-wrap gap-4 rounded-lg bg-zinc-600/50"
             >
-              <div className="h-[70%] w-full rounded bg-zinc-800/40"></div>
-              <div className="h-[20%] w-full rounded bg-zinc-800/40"></div>
+              <div className="h-[70%] w-full rounded-xl bg-zinc-800/40"></div>
+              <div className="h-2 w-2/5 rounded-xl bg-zinc-800/40"></div>
+              <div className="h-2 w-2/5 rounded-xl bg-zinc-800/40"></div>
+              <div className="h-2 w-1/2 rounded-xl bg-zinc-800/40"></div>
             </div>
           ))}
         </div>
