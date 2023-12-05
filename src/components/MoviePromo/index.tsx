@@ -1,27 +1,30 @@
 import Image from 'next/image';
-import { MovieType } from '@/types';
+import { getMovies, getRandomIntMax, getTitle, getTrailer } from '@/utils';
+import { ReactElement } from 'react';
 
-export default function MoviePromo({
-  id,
-  title,
-  fullTitle,
-  crew,
-  trailer,
-  image,
-  plot,
-  runtimeStr,
-}: MovieType) {
+export default async function MoviePromo(): Promise<ReactElement<any, any>> {
+  const allTopMovies = await getMovies();
+  const randomInt = getRandomIntMax(249);
+  const promoMovieData = allTopMovies[randomInt];
+  const promoMovieTrailer = await getTrailer(promoMovieData.id);
+  const promoMovieTitle = await getTitle(promoMovieData.id);
+  const promoMovieDetails = {
+    ...promoMovieData,
+    ...promoMovieTitle,
+    trailer: promoMovieTrailer,
+  };
+
   return (
     <div className="relative w-full md:min-h-96 md:max-h-[75vh] mt-4 mb-12 overflow-hidden">
       <div className="md:grid grid-cols-2 xl:grid-cols-3 auto-rows-min gap-4 py-5">
         <div className="order-2 xl:col-span-2 text-2xl xl:text-4xl pb-5 px-3 md:p-0 md:bg-gradient-to-b md:from-custom-grey-800 md:to-transparent">
-          {fullTitle}
+          {promoMovieDetails.fullTitle}
         </div>
 
         <div className="order-1 row-span-3">
           <Image
-            src={image || ''}
-            alt={title || ''}
+            src={promoMovieDetails.image || ''}
+            alt={promoMovieDetails.title || ''}
             width={300}
             height={300}
             className="min-w-full"
@@ -31,25 +34,30 @@ export default function MoviePromo({
         <div className="order-3 xl:col-span-2 text-sm">
           <div className="py-2">
             <p className="text-bold">Crew: </p>
-            <p className="text-gray-50/70">{crew}</p>
+            <p className="text-gray-50/70">{promoMovieDetails.crew}</p>
           </div>
-          {plot && (
+          {promoMovieDetails.plot && (
             <div className="py-2">
               <p className="text-bold">Plot: </p>
-              <p className="text-gray-50/70">{plot}</p>
+              <p className="text-gray-50/70">{promoMovieDetails.plot}</p>
             </div>
           )}
-          {runtimeStr && (
+          {promoMovieDetails.runtimeStr && (
             <div className="py-2">
               <p className="text-bold">Duration: </p>
-              <p className="text-gray-50/70">{runtimeStr}</p>
+              <p className="text-gray-50/70">{promoMovieDetails.runtimeStr}</p>
             </div>
           )}
         </div>
 
-        {trailer !== undefined && (
+        {promoMovieDetails.trailer !== undefined && (
           <div className="order-4 xl:col-span-2">
-            <embed type="video/webm" src={trailer} width="480" height="210" />
+            <embed
+              type="video/webm"
+              src={promoMovieDetails.trailer}
+              width="480"
+              height="210"
+            />
           </div>
         )}
       </div>
