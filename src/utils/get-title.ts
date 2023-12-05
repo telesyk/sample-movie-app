@@ -1,11 +1,14 @@
-import { ENDPOINT } from '@/constants';
+import { ENDPOINT, NOTIFICATION } from '@/constants';
 
 async function getTitle(id: string) {
   try {
     const res = await fetch(ENDPOINT.mock.movieTitle(id));
-    return res.json();
+
+    if (res.ok) return res.json();
+
+    throw new Error(`Error [getTitle]\n ${id}\n`);
   } catch (error) {
-    console.error(`Failed loading movie details [getTitle]\n ${id}\n`, error);
+    console.error(NOTIFICATION.error.fetchData, error);
     return null;
   }
 }

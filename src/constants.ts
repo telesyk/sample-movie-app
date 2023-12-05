@@ -22,6 +22,6 @@ export const ENDPOINT = {
 
 export const NOTIFICATION = {
   error: {
-    fetchData: 'Failed to fetch data! Check API path`s',
+    fetchData: 'Failed to fetch data!',
   },
 };

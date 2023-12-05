@@ -1,6 +1,7 @@
 import { MovieType } from '@/types';
 import getMovies from './get-movies';
 import getTitle from './get-title';
+import { NOTIFICATION } from '@/constants';
 
 export default async function getSingleMovie(id: string) {
   try {
@@ -15,7 +16,7 @@ export default async function getSingleMovie(id: string) {
     console.error(`Failed util [getSingleMovie]\n ${id}\n`, error);
     return {
       error: true,
-      errorMessage: 'Failed loading data',
+      errorMessage: NOTIFICATION.error.fetchData,
     };
   }
 }

@@ -1,13 +1,17 @@
-import { ENDPOINT } from '@/constants';
+import { ENDPOINT, NOTIFICATION } from '@/constants';
 
 async function getPosters(id: string) {
-  const res = await fetch(ENDPOINT.mock.moviePoster(id));
+  try {
+    const res = await fetch(ENDPOINT.mock.moviePoster(id));
 
-  if (!res.ok) {
-    throw new Error(`Failed loading posters [getPosters]\n ${id}\n`);
+    if (!res.ok) {
+      throw new Error(`Error [getPosters]\n ${id}\n`);
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error(NOTIFICATION.error.fetchData, error);
   }
-
-  return res.json();
 }
 
 export default getPosters;

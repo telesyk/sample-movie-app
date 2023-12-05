@@ -28,13 +28,11 @@ async function getMovies(endpointType?: EndpointType) {
   try {
     const res = await fetch(endpointUrl);
 
-    if (!res.ok) {
-      throw new Error(NOTIFICATION.error.fetchData);
-    }
+    if (res.ok) return res.json();
 
-    return res.json();
+    throw new Error(`Error [getMovies] ${endpointUrl}\n`);
   } catch (error) {
-    console.error('Fail [getMovies]\n', error);
+    console.error(NOTIFICATION.error.fetchData, error);
   }
 }
 
