@@ -1,7 +1,7 @@
-import React from 'react';
 import Image from 'next/image';
 import { FaImdb } from 'react-icons/fa';
 import { getSingleMovie } from '@/utils';
+import Loading from './Loading';
 
 type SingleMovieProps = {
   movieId: string;
@@ -128,21 +128,7 @@ async function MoviePage({ params }: { params: { movieId: string } }) {
     );
   };
 
-  return (
-    <>
-      {!data ? (
-        <div className="animate animate-pulse p-8 h-full w-full flex flex-wrap gap-8 rounded-lg bg-zinc-600/50">
-          <div className="h-[50vh] w-full rounded-xl bg-zinc-800/40"></div>
-          <div className="h-8 w-3/5 rounded-xl bg-zinc-800/40"></div>
-          <div className="h-8 w-2/5 rounded-xl bg-zinc-800/40"></div>
-          <div className="h-8 w-1/2 rounded-xl bg-zinc-800/40"></div>
-          <div className="h-8 w-3/4 rounded-xl bg-zinc-800/40"></div>
-        </div>
-      ) : (
-        renderMovieData(data)
-      )}
-    </>
-  );
+  return <>{!data ? <Loading /> : renderMovieData(data)}</>;
 }
 
 export default MoviePage;
