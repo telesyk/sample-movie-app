@@ -4,6 +4,7 @@ import { Props2 } from '@/components/Test/testTypes';
 //
 import PromoLoading from '@/components/MoviePromo/PromoLoading';
 import Loading from '../[movieId]/Loading';
+import ItemLoading from '@/components/MovieList/ItemLoading';
 
 async function getData() {
   const res = await fetch(ENDPOINT.test.products);
@@ -19,11 +20,19 @@ async function Test() {
 
   return (
     <>
-      <p>Test Loading for Promo</p>
-      <PromoLoading />
-      <p>Test Loading for SingleMovie page</p>
-      <Loading />
-      <h1 className="text-2xl">Hey you! wsap!!</h1>
+      <div className="flex flex-col gap-4 my-8">
+        <p>Test ItemLoading for movie list</p>
+        <ItemLoading />
+      </div>
+      <div className="flex flex-col gap-4 my-8">
+        <p>Test Loading for Promo</p>
+        <PromoLoading />
+      </div>
+      <div className="flex flex-col gap-4 my-8">
+        <p>Test Loading for SingleMovie page</p>
+        <Loading />
+      </div>
+
       <div className="py-6 flex gap-6 flex-wrap">
         {data.products.map((product: Props2) => (
           <TestComponent key={product.id} product={product} />
