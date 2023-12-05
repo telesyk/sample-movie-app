@@ -6,16 +6,16 @@ export default async function getSingleMovie(id: string) {
   try {
     const allData = await getMovies();
     const titleData = await getTitle(id);
-    const currentMovie = allData.find((item: MovieType) => {
-      if (item.id === id)
-        return {
-          ...item,
-          ...titleData,
-        };
-    });
-    return currentMovie;
+    const currentMovie = allData.find((item: MovieType) => item.id === id);
+
+    console.debug('getSingleMovie', { ...currentMovie, ...titleData });
+
+    return { ...currentMovie, ...titleData };
   } catch (error) {
     console.error(`Failed util [getSingleMovie]\n ${id}\n`, error);
-    return null;
+    return {
+      error: true,
+      errorMessage: 'Failed loading data',
+    };
   }
 }

@@ -3,29 +3,46 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const id = params.id;
-  const {
-    fullTitle,
-    releaseDate,
-    runtimeStr,
-    plot,
-    awards,
-    directors,
-    stars,
-    writers,
-  } = await import(`@/imdb_api_data/Movie/${id}/Title\ ${id}.json`);
-  const body: object = {
-    fullTitle,
-    releaseDate,
-    runtimeStr,
-    plot,
-    awards,
-    directors,
-    stars,
-    writers,
-  } || {
-    message: `Title was not found for ${id} movie`,
-  };
-  const myOptions = { status: 200, statusText: 'Mock data loaded' };
+  try {
+    const {
+      fullTitle,
+      releaseDate,
+      runtimeStr,
+      plot,
+      awards,
+      stars,
+      directors,
+      writers,
+      genres,
+      companies,
+      countries,
+      languages,
+      contentRating,
+      errorMessage,
+    } = await import(`@/imdb_api_data/Movie/${id}/Title\ ${id}.json`);
 
-  return new Response(JSON.stringify(body), myOptions);
+    if (errorMessage === '') {
+      const body: object = {
+        fullTitle,
+        releaseDate,
+        runtimeStr,
+        plot,
+        awards,
+        stars,
+        directors,
+        writers,
+        genres,
+        companies,
+        countries,
+        languages,
+        contentRating,
+      };
+      const myOptions = { status: 200, statusText: 'Title data loaded' };
+
+      return new Response(JSON.stringify(body), myOptions);
+    }
+    throw new Error(`Title was not found for ${id} movie. \n${errorMessage}\n`);
+  } catch (error) {
+    console.error('Fail fetching data\n', error);
+  }
 }

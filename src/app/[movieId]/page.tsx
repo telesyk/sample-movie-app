@@ -6,33 +6,56 @@ import { getSingleMovie } from '@/utils';
 type SingleMovieProps = {
   movieId: string;
   title: string;
-  fullTitle?: string;
   image: string;
-  year?: number;
-  imDbRating: number;
-  imDbRatingCount?: number;
+  plot: string;
   stars: string;
+  imDbRating: number;
+  fullTitle?: string;
+  year?: number;
+  imDbRatingCount?: number;
+  awards?: string;
   directors?: string;
   writers?: string;
-  plot: string;
+  genres?: string;
+  companies?: string;
+  countries?: string;
+  languages?: string;
+  contentRating?: string;
+  error?: boolean;
+  errorMessage?: string;
 };
 
 async function MoviePage({ params }: { params: { movieId: string } }) {
   const data = await getSingleMovie(params.movieId);
-  console.log('debug 2', data);
 
-  const renderMovieDetails = (movieData: SingleMovieProps) => {
+  const renderMovieData = (movieData: SingleMovieProps) => {
+    if (movieData.error && movieData.errorMessage)
+      return (
+        <div className="my-4 opacity-75 text-sm">
+          <code className="p-3 border border-slate-400 rounded-lg bg-slate-50/50">
+            {data.errorMessage}
+          </code>
+        </div>
+      );
+
+    // console.debug('movieData debug', movieData);
     const {
       title,
-      fullTitle,
       image,
-      year,
-      imDbRating,
-      imDbRatingCount,
+      plot,
       stars,
+      imDbRating,
+      fullTitle,
+      year,
+      imDbRatingCount,
+      awards,
       directors,
       writers,
-      plot,
+      genres,
+      companies,
+      countries,
+      languages,
+      contentRating,
     } = movieData;
 
     return (
@@ -62,16 +85,42 @@ async function MoviePage({ params }: { params: { movieId: string } }) {
               Stars:{' '}
               <span className="text-custom-light/80 italic">{stars}</span>
             </p>
+            <p className="py-4">
+              <span className="text-custom-light/80 italic">{plot}</span>
+            </p>
             <p className="">
               Directors:{' '}
               <span className="text-custom-light/80 italic">{directors}</span>
             </p>
-            <p className="py-4">
+            <p className="">
               Writers:{' '}
               <span className="text-custom-light/80 italic">{writers}</span>
             </p>
             <p className="py-4">
-              <span className="text-custom-light/80 italic">{plot}</span>
+              Awards:{' '}
+              <span className="text-custom-light/80 italic">{awards}</span>
+            </p>
+            <p className="">
+              Genres:{' '}
+              <span className="text-custom-light/80 italic">{genres}</span>
+            </p>
+            <p className="">
+              Companies:{' '}
+              <span className="text-custom-light/80 italic">{companies}</span>
+            </p>
+            <p className="">
+              Countries:{' '}
+              <span className="text-custom-light/80 italic">{countries}</span>
+            </p>
+            <p className="">
+              Languages:{' '}
+              <span className="text-custom-light/80 italic">{languages}</span>
+            </p>
+            <p className="">
+              ContentRating:{' '}
+              <span className="text-custom-light/80 italic">
+                {contentRating}
+              </span>
             </p>
           </div>
         </div>
@@ -80,8 +129,8 @@ async function MoviePage({ params }: { params: { movieId: string } }) {
   };
 
   return (
-    <div>
-      {!data || !data.length ? (
+    <>
+      {!data ? (
         <div className="animate animate-pulse p-8 h-full w-full flex flex-wrap gap-8 rounded-lg bg-zinc-600/50">
           <div className="h-[50vh] w-full rounded-xl bg-zinc-800/40"></div>
           <div className="h-8 w-3/5 rounded-xl bg-zinc-800/40"></div>
@@ -90,9 +139,9 @@ async function MoviePage({ params }: { params: { movieId: string } }) {
           <div className="h-8 w-3/4 rounded-xl bg-zinc-800/40"></div>
         </div>
       ) : (
-        renderMovieDetails(data)
+        renderMovieData(data)
       )}
-    </div>
+    </>
   );
 }
 

@@ -3,13 +3,19 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const id = params.id;
-  const { linkEmbed } = await import(
-    `@/imdb_api_data/Movie/${id}/Trailer\ ${id}.json`
-  );
-  const body: object = linkEmbed || {
-    message: `Trailer not found for ${id} movie`,
-  };
-  const myOptions = { status: 200, statusText: 'Mock data loaded' };
+  try {
+    const { linkEmbed, errorMessage } = await import(
+      `@/imdb_api_data/Movie/${id}/Trailer\ ${id}.json`
+    );
 
-  return new Response(JSON.stringify(body), myOptions);
+    if (errorMessage === '') {
+      const body: object = linkEmbed;
+      const myOptions = { status: 200, statusText: 'Trailer link loaded' };
+
+      return new Response(JSON.stringify(body), myOptions);
+    }
+    throw new Error(`Trailer not found for ${id} movie. \n${errorMessage}\n`);
+  } catch (error) {
+    console.error('Fail fetching data\n', error);
+  }
 }

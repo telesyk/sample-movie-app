@@ -11,7 +11,7 @@ async function getData() {
   return res.json();
 }
 
-async function Home() {
+async function Test() {
   const data = await getData();
 
   return (
@@ -26,4 +26,4 @@ async function Home() {
   );
 }
 
-export default Home;
+export default Test;
