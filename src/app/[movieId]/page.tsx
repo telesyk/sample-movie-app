@@ -9,6 +9,7 @@ type SingleMovieProps = {
   image: string;
   plot: string;
   stars: string;
+  actorList?: object[];
   imDbRating: number;
   fullTitle?: string;
   year?: number;
@@ -38,12 +39,12 @@ async function MoviePage({ params }: { params: { movieId: string } }) {
         </div>
       );
 
-    // console.debug('movieData debug', movieData);
     const {
       title,
       image,
       plot,
       stars,
+      actorList,
       imDbRating,
       fullTitle,
       year,
@@ -61,15 +62,17 @@ async function MoviePage({ params }: { params: { movieId: string } }) {
     return (
       <>
         <h1 className="text-3xl text-custom-light/80">{fullTitle || title}</h1>
-        <div className="flex items-center flex-col sm:flex-row sm:items-start gap-4 py-4 lg:py-8">
-          <Image
-            src={image}
-            alt={title || ''}
-            width={200}
-            height={200}
-            className="w-fit h-auto basis-1 sm:basis-1/2 md:basis-1/3"
-          />
-          <div className="basis-1 sm:basis-1/2 md:basis-2/3">
+        <div className="overflow-hidden flex items-center flex-col sm:flex-row sm:items-start gap-4 py-4 lg:py-8">
+          <div className="sm:basis-1/3">
+            <Image
+              src={image}
+              alt={title || ''}
+              width={200}
+              height={200}
+              className="w-fit h-auto"
+            />
+          </div>
+          <div className="sm:basis-2/3 max-w-full sm:max-w-[66%]">
             <p className="flex gap-2 items-center py-4 text-2xl">
               <FaImdb />
               {imDbRating} (
@@ -81,10 +84,31 @@ async function MoviePage({ params }: { params: { movieId: string } }) {
             <p>
               Year: <span className="text-custom-light/80">{year}</span>
             </p>
-            <p className="py-4">
-              Stars:{' '}
-              <span className="text-custom-light/80 italic">{stars}</span>
-            </p>
+            <div className="py-4 overflow-x-auto">
+              {!actorList?.length ? (
+                <>
+                  <span className="text-custom-light/80 italic">Actors: </span>
+                  <span className="text-custom-light/80 italic">{stars}</span>
+                </>
+              ) : (
+                <div className="flex gap-4">
+                  {actorList.map((actor: any) => (
+                    <div key={actor.id} className="basis-20 min-w-[5rem]">
+                      <div className="my-2">
+                        <Image
+                          src={actor.image}
+                          alt={actor.name}
+                          width={150}
+                          height={150}
+                        />
+                      </div>
+                      <div className="font-bold text-sm">{actor.name}</div>
+                      <div className="text-xs italic">{actor.asCharacter}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <p className="py-4">
               <span className="text-custom-light/80 italic">{plot}</span>
             </p>

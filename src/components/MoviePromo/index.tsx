@@ -18,17 +18,19 @@ export default async function MoviePromo(): Promise<ReactElement<any, any>> {
     <div className="relative w-full md:min-h-96 md:max-h-[75vh] mt-4 mb-12 overflow-hidden">
       <div className="md:grid grid-cols-2 xl:grid-cols-3 auto-rows-min gap-4 py-5">
         <div className="order-2 xl:col-span-2 text-2xl xl:text-4xl pb-5 px-3 md:p-0 md:bg-gradient-to-b md:from-custom-grey-800 md:to-transparent">
-          {promoMovieDetails.fullTitle}
+          <a href={`/${promoMovieDetails.id}`}>{promoMovieDetails.fullTitle}</a>
         </div>
 
         <div className="order-1 row-span-3">
-          <Image
-            src={promoMovieDetails.image || ''}
-            alt={promoMovieDetails.title || ''}
-            width={300}
-            height={300}
-            className="min-w-full"
-          />
+          <a href={`/${promoMovieDetails.id}`}>
+            <Image
+              src={promoMovieDetails.image || ''}
+              alt={promoMovieDetails.title || ''}
+              width={300}
+              height={300}
+              className="min-w-full"
+            />
+          </a>
         </div>
 
         <div className="order-3 xl:col-span-2 text-sm">
