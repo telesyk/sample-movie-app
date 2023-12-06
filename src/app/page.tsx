@@ -16,9 +16,9 @@ async function Home() {
         {/* @ts-expect-error Server Component */}
         <MoviePromo />
       </Suspense>
-      <MovieList data={dataTheaters} title="In theaters:" />
-      <MovieList data={dataSoon} title="Coming soon:" />
-      <MovieList data={dataPopular} title="Most popular:" />
+      <MovieList data={dataTheaters} listTitle="In theaters:" />
+      <MovieList data={dataSoon} listTitle="Coming soon:" />
+      <MovieList data={dataPopular} listTitle="Most popular:" />
     </>
   );
 }

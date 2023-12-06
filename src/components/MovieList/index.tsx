@@ -2,22 +2,20 @@ import MovieCard from '@/components/MovieCard';
 import MovieCardInfo from '@/components/MovieCard/MovieCardInfo';
 import MovieCardImage from '@/components/MovieCard/MovieCardImage';
 import { MovieType } from '@/types';
-import ItemLoading from './ItemLoading';
-
-const mockItems: number[] = [1, 2, 3];
+import ItemListLoading from './ItemListLoading';
 
 export default function MovieList({
   data,
-  title,
+  listTitle,
 }: {
   data: any;
-  title: string;
+  listTitle: string;
 }) {
   return (
     <>
       {data && data.length ? (
         <>
-          <h1 className="text-2xl">{title}</h1>
+          <h1 className="text-2xl">{listTitle}</h1>
           <div className="my-8 flex gap-4 overflow-x-auto">
             {data.map((movie: MovieType) => (
               <MovieCard key={movie.id} movie={movie}>
@@ -29,9 +27,7 @@ export default function MovieList({
         </>
       ) : (
         <div className="my-8 flex gap-4">
-          {mockItems.map((item: number) => (
-            <ItemLoading key={item} />
-          ))}
+          <ItemListLoading />
         </div>
       )}
     </>

@@ -4,7 +4,7 @@ import { Props2 } from '@/components/Test/testTypes';
 //
 import PromoLoading from '@/components/MoviePromo/PromoLoading';
 import Loading from '../[movieId]/Loading';
-import ItemLoading from '@/components/MovieList/ItemLoading';
+import ItemListLoading from '@/components/MovieList/ItemListLoading';
 
 async function getData() {
   const res = await fetch(ENDPOINT.test.products);
@@ -22,7 +22,9 @@ async function Test() {
     <>
       <div className="flex flex-col gap-4 my-8">
         <p>Test ItemLoading for movie list</p>
-        <ItemLoading />
+        <div className="flex gap-4">
+          <ItemListLoading />
+        </div>
       </div>
       <div className="flex flex-col gap-4 my-8">
         <p>Test Loading for Promo</p>
