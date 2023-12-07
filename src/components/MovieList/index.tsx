@@ -1,23 +1,25 @@
+import { MovieType, EndpointType } from '@/types';
 import MovieCard from '@/components/MovieCard';
 import MovieCardInfo from '@/components/MovieCard/MovieCardInfo';
 import MovieCardImage from '@/components/MovieCard/MovieCardImage';
-import { MovieType } from '@/types';
-import ItemListLoading from './ItemListLoading';
+import { getMovies } from '@/utils';
 
-export default function MovieList({
-  data,
+export default async function MovieList({
+  type = '',
   listTitle,
 }: {
-  data: any;
+  type: EndpointType;
   listTitle: string;
 }) {
+  const movies = await getMovies(type);
+
   return (
     <>
-      {data && data.length ? (
+      {movies && movies.length && (
         <>
           <h1 className="text-2xl">{listTitle}</h1>
           <div className="my-8 flex gap-4 overflow-x-auto">
-            {data.map((movie: MovieType) => (
+            {movies.map((movie: MovieType) => (
               <MovieCard key={movie.id} movie={movie}>
                 <MovieCardImage />
                 <MovieCardInfo />
@@ -25,10 +27,6 @@ export default function MovieList({
             ))}
           </div>
         </>
-      ) : (
-        <div className="my-8 flex gap-4">
-          <ItemListLoading />
-        </div>
       )}
     </>
   );

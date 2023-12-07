@@ -1,14 +1,25 @@
-import { getMovies } from '@/utils';
+import { Suspense } from 'react';
 import MovieList from '@/components/MovieList';
 import MoviePromo from '@/components/MoviePromo';
 import PromoLoading from '@/components/MoviePromo/PromoLoading';
-import { Suspense } from 'react';
+import ItemListLoading from '@/components/MovieList/ItemListLoading';
+
+const lists = [
+  {
+    type: 'intheaters',
+    title: 'In Theaters',
+  },
+  {
+    type: 'comingsoon',
+    title: 'Coming Soon',
+  },
+  {
+    type: 'mostpopular',
+    title: 'Most Popular',
+  },
+];
 
 async function Home() {
-  const dataTheaters = await getMovies('intheaters');
-  const dataSoon = await getMovies('comingsoon');
-  const dataPopular = await getMovies('mostpopular');
-
   return (
     <>
       <Suspense fallback={<PromoLoading />}>
@@ -16,9 +27,13 @@ async function Home() {
         {/* @ts-expect-error Server Component */}
         <MoviePromo />
       </Suspense>
-      <MovieList data={dataTheaters} listTitle="In theaters:" />
-      <MovieList data={dataSoon} listTitle="Coming soon:" />
-      <MovieList data={dataPopular} listTitle="Most popular:" />
+      {lists.map((list: any) => (
+        <Suspense key={list.title} fallback={<ItemListLoading />}>
+          {/* https://github.com/vercel/next.js/issues/42292 */}
+          {/* @ts-expect-error Server Component */}
+          <MovieList type={list.type} listTitle={list.title} />
+        </Suspense>
+      ))}
     </>
   );
 }

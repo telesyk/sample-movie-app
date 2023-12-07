@@ -5,7 +5,7 @@ export default function ItemLoading({ index = 1 }: { index?: number }) {
   };
 
   return (
-    <div className="p-4 h-[160px] lg:h-[200px] w-[320px] flex flex-wrap items-start rounded-lg bg-zinc-600/50">
+    <div className="p-4 h-[160px] lg:h-[200px] min-w-[320px] flex flex-wrap items-start rounded-lg bg-zinc-600/50">
       <div style={styles} className="animate animate-pulse basis-1/2 h-full">
         <div className="h-full w-full rounded-xl bg-zinc-800/40"></div>
       </div>

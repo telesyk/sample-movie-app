@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import { getMovies, getRandomIntMax, getTitle, getTrailer } from '@/utils';
+import Link from 'next/link';
 import { ReactElement } from 'react';
+import { getMovies, getRandomIntMax, getTitle, getTrailer } from '@/utils';
 
 export default async function MoviePromo(): Promise<ReactElement<any, any>> {
   const allTopMovies = await getMovies();
@@ -18,11 +19,13 @@ export default async function MoviePromo(): Promise<ReactElement<any, any>> {
     <div className="relative w-full md:min-h-96 md:max-h-[75vh] mt-4 mb-12 overflow-hidden">
       <div className="md:grid grid-cols-2 xl:grid-cols-3 auto-rows-min gap-4 py-5">
         <div className="order-2 xl:col-span-2 text-2xl xl:text-4xl pb-5 px-3 md:p-0 md:bg-gradient-to-b md:from-custom-grey-800 md:to-transparent">
-          <a href={`/${promoMovieDetails.id}`}>{promoMovieDetails.fullTitle}</a>
+          <Link href={`/${promoMovieDetails.id}`}>
+            {promoMovieDetails.fullTitle}
+          </Link>
         </div>
 
         <div className="order-1 row-span-3">
-          <a href={`/${promoMovieDetails.id}`}>
+          <Link href={`/${promoMovieDetails.id}`}>
             <Image
               src={promoMovieDetails.image || ''}
               alt={promoMovieDetails.title || ''}
@@ -30,7 +33,7 @@ export default async function MoviePromo(): Promise<ReactElement<any, any>> {
               height={300}
               className="min-w-full"
             />
-          </a>
+          </Link>
         </div>
 
         <div className="order-3 xl:col-span-2 text-sm">

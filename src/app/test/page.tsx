@@ -22,9 +22,7 @@ async function Test() {
     <>
       <div className="flex flex-col gap-4 my-8">
         <p>Test ItemLoading for movie list</p>
-        <div className="flex gap-4">
-          <ItemListLoading />
-        </div>
+        <ItemListLoading />
       </div>
       <div className="flex flex-col gap-4 my-8">
         <p>Test Loading for Promo</p>

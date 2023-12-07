@@ -19,3 +19,11 @@ export interface MovieType extends MovieImageType {
   trailer?: string;
   runtimeStr?: string;
 }
+
+export type EndpointType =
+  | undefined
+  | ''
+  | 'comingsoon'
+  | 'intheaters'
+  | 'mostpopular'
+  | 'toprated';

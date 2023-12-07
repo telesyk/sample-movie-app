@@ -1,12 +1,5 @@
 import { ENDPOINT, NOTIFICATION } from '@/constants';
-
-type EndpointType =
-  | undefined
-  | ''
-  | 'comingsoon'
-  | 'intheaters'
-  | 'mostpopular'
-  | 'toprated';
+import { EndpointType } from '@/types';
 
 function movieEndpoint(type?: EndpointType) {
   switch (type) {
@@ -15,7 +8,7 @@ function movieEndpoint(type?: EndpointType) {
     case 'intheaters':
       return ENDPOINT.mock.inTheaters;
     case 'mostpopular':
-      return ENDPOINT.mock.mostPopular;
+      return ENDPOINT.mock.top250moviesLimited;
     case 'toprated':
       return ENDPOINT.mock.top250moviesLimited;
     default:
@@ -28,7 +21,9 @@ async function getMovies(endpointType?: EndpointType) {
   try {
     const res = await fetch(endpointUrl);
 
-    if (res.ok) return res.json();
+    if (res.ok) {
+      return res.json();
+    }
 
     throw new Error(`Error [getMovies] ${endpointUrl}\n`);
   } catch (error) {
