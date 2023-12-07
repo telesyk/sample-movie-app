@@ -7,7 +7,6 @@ function Navbar() {
       <div className="mx-auto max-w-screen-md">
         <nav className="py-4 flex justify-center gap-4">
           <Link href="/">Home</Link>
-          <Link href="/test">Test</Link>
         </nav>
       </div>
     </div>
